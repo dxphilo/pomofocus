@@ -10,7 +10,7 @@ The technique uses a timer to break down work into intervals, traditionally 25 m
 
 - Vuejs
 - Nuxtjs
-- autho0
+- Auth0
 
 ## Build Setup
 
