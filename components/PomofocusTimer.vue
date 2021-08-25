@@ -1,0 +1,173 @@
+<template>
+  <!-- PomoFocus Timer Componenent -->
+  <div>
+    <div class="timer">
+      <div class="text-center flex justify-center pb-0 mb-0 mt-4 h-16">
+        <div v-for="tab in tabs" :key="tab">
+          <div class="tabs">
+            <button
+              class="
+                text-lg
+                ml-3
+                bg-purple-200
+                hover:bg-purple-300
+                rounded
+                py-1.5
+                px-5
+              "
+            >
+              {{ tab }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-9xl pt-0 mt-0 font-bold">
+          {{ timerMinutes }}:{{ timerSeconds }}
+        </h4>
+        <div class="button-toggle">
+          <button
+            class="
+              text-4xl
+              mt-4
+              rounded
+              font-bold
+              px-14
+              py-3
+              shadow-lg
+              bg-purple-600
+              hover:shadow-xl
+              hover:bg-purple-700
+            "
+            @click="start"
+            v-if="isActive === false"
+          >
+            START
+          </button>
+          <button
+            class="
+              text-4xl
+              mt-4
+              rounded
+              font-bold
+              px-14
+              py-3
+              shadow-lg
+              bg-purple-600
+              hover:shadow-xl
+              hover:bg-purple-700
+            "
+            @click="stop"
+            v-if="isActive === true"
+          >
+            STOP
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS SECTION -->
+    <div class="tasks">
+      <h2 class="pt-8 text-2xl py-6">Tasks:</h2>
+      <div class="w-1/4 my-0 mx-auto">
+        <hr class="py-4" />
+      </div>
+      <div class="addtasks" v-for="task in tasks" :key="task">
+        <button
+          class="
+            py-3
+            rounded
+            w-96
+            px-8
+            bg-purple-700
+            hover:bg-purple-800
+            text-white text-xl
+            mb-2
+            border-l-4
+          "
+        >
+          <p>{{ task }}</p>
+        </button>
+      </div>
+      <div class="addtask">
+        <form @submit.prevent="updateTasks">
+          <input
+            type="text"
+            class="
+              py-3
+              rounded
+              w-96
+              px-8
+              bg-purple-600
+              hover:bg-purple-800
+              text-white text-xl
+              mb-2
+              border-l-4
+              outline-none
+              text-center
+            "
+            name="task"
+            id="task"
+            v-model="addtask"
+            placeholder="Add tasks here ..."
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "Home",
+  data() {
+    return {
+      isActive: false,
+      tasks: ["edit youtube video", "write a blog post"],
+      tabs: ["Pomodoro", "Short Break"],
+      addtask: "",
+      timerType: 0,
+      totalSeconds: 25 * 60,
+      shortbreak: "5:00",
+      pomodoroInstance: null,
+    };
+  },
+  computed: {
+    timerMinutes() {
+      const minutes = Math.floor(this.totalSeconds / 60);
+      return this.formatTime(minutes);
+    },
+    timerSeconds() {
+      let sec = this.totalSeconds % 60;
+
+      return this.formatTime(sec);
+    },
+  },
+  methods: {
+    formatTime(time) {
+      if (time < 10) {
+        return "0" + time;
+      }
+      return time.toString();
+    },
+    //   START TIME
+    start() {
+      this.pomodoroInstance = setInterval(() => {
+        this.totalSeconds -= 1;
+      }, 1000);
+      this.isActive = true;
+    },
+    stop() {
+      stopInterval(this.pomodoroInstance);
+      this.isActive = false;
+    },
+    updateTasks() {
+      let newTask = this.addtask;
+      this.tasks.push(newTask);
+      this.addtask = "";
+      console.log("Task updated successfully");
+    },
+  },
+};
+</script>
+<style scoped>
+</style>
