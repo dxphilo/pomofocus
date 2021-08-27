@@ -24,7 +24,12 @@
       >
         {{ task.title }}
       </h3>
-      <button class="pl-8" @click="$emit('deleteTask', task.title)">X</button>
+      <button
+        class="pl-8 text-red-500"
+        @click="$emit('deleteTask', task.title)"
+      >
+        X
+      </button>
     </li>
   </div>
 </template>

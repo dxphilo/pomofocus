@@ -1,4 +1,10 @@
-# Pomofocus
+
+<div align="center">
+
+<h1>Pomofocus</h1>
+
+</div>
+
 
 Application that implemest the use of the Pomodoro Technique. This technique is a time management method developed by Francesco Cirillo in the late 1980s. 
 
@@ -11,6 +17,14 @@ The technique uses a timer to break down work into intervals, traditionally 25 m
 - Vuejs
 - Nuxtjs
 - Auth0
+- Tailwind CSS
+
+
+## Intro
+
+- Add task to be complete
+- Double click task to show complete
+- Click x to delete task
 
 ## Build Setup
 
