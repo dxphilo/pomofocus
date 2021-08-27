@@ -16,10 +16,15 @@
         my-0
         mx-auto
       "
-      v-bind:class="{ 'line-through': task.complete }"
-      v-on:dblclick="isCompleted"
     >
-      {{ task.title }}
+      <h3
+        class="inline"
+        v-bind:class="{ 'line-through': task.complete }"
+        v-on:dblclick="isCompleted"
+      >
+        {{ task.title }}
+      </h3>
+      <button class="pl-8" @click="$emit('deleteTask', task.title)">X</button>
     </li>
   </div>
 </template>

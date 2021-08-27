@@ -73,7 +73,7 @@
         <hr class="py-4" />
       </div>
       <div v-for="task in tasks" :key="task.title" id="task.title">
-        <Task v-bind:task="task" />
+        <Task v-bind:task="task" v-on:deleteTask="deleteTask" />
       </div>
       <div class="addtask">
         <form @submit.prevent="updateTasks">
@@ -175,6 +175,10 @@ export default {
         this.addtask = "";
         console.log("Task has been updated successfully");
       }
+    },
+    // delete the task
+    deleteTask(id) {
+      this.tasks = this.tasks.filter((task) => task.title !== id);
     },
   },
 };
