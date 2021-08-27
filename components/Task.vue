@@ -15,10 +15,11 @@
         list-none
         my-0
         mx-auto
+        focus:outline-none
       "
     >
       <h3
-        class="inline"
+        class="inline focus:outline-none"
         v-bind:class="{ 'line-through': task.complete }"
         v-on:dblclick="isCompleted"
       >
