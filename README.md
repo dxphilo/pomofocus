@@ -43,7 +43,7 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+For detailed explanation on how things work, check out the [documentation](https://medium.com/javascript-in-plain-english/getting-started-with-nuxt-4652bc83ddc6).
 
 
 
