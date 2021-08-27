@@ -72,22 +72,8 @@
       <div class="w-1/4 my-0 mx-auto">
         <hr class="py-4" />
       </div>
-      <div class="addtasks" v-for="task in tasks" :key="task">
-        <button
-          class="
-            py-3
-            rounded
-            w-96
-            px-8
-            bg-purple-700
-            hover:bg-purple-800
-            text-white text-xl
-            mb-2
-            border-l-4
-          "
-        >
-          <p>{{ task }}</p>
-        </button>
+      <div v-for="task in tasks" :key="task.title" id="task.title">
+        <Task v-bind:task="task" />
       </div>
       <div class="addtask">
         <form @submit.prevent="updateTasks">
@@ -122,7 +108,18 @@ export default {
   data() {
     return {
       isActive: false,
-      tasks: ["edit youtube video", "write a blog post"],
+      tasks: [
+        {
+          title: "edit youtube video",
+          edit: false,
+          complete: false,
+        },
+        {
+          title: "write a blog post",
+          edit: false,
+          complete: false,
+        },
+      ],
       tabs: ["Pomodoro", "Short Break"],
       addtask: "",
       timerType: 0,
@@ -132,10 +129,12 @@ export default {
     };
   },
   computed: {
+    // show minutes
     timerMinutes() {
       const minutes = Math.floor(this.totalSeconds / 60);
       return this.formatTime(minutes);
     },
+    // show seconds
     timerSeconds() {
       let sec = this.totalSeconds % 60;
 
@@ -143,28 +142,39 @@ export default {
     },
   },
   methods: {
+    // formats time function
     formatTime(time) {
       if (time < 10) {
         return "0" + time;
       }
       return time.toString();
     },
-    //   START TIME
+    // start the timeer count
     start() {
       this.pomodoroInstance = setInterval(() => {
         this.totalSeconds -= 1;
       }, 1000);
       this.isActive = true;
     },
+    // stop the timer interval
     stop() {
-      stopInterval(this.pomodoroInstance);
+      clearInterval(this.pomodoroInstance);
       this.isActive = false;
     },
+    // update the tasks
     updateTasks() {
-      let newTask = this.addtask;
-      this.tasks.push(newTask);
-      this.addtask = "";
-      console.log("Task updated successfully");
+      if (this.addtask === "") {
+        alert("Please enter task to proceed");
+      } else {
+        let newTask = {
+          title: this.addtask,
+          complete: false,
+          edit: false,
+        };
+        this.tasks.push(newTask);
+        this.addtask = "";
+        console.log("Task has been updated successfully");
+      }
     },
   },
 };
