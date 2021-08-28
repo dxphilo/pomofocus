@@ -9,12 +9,13 @@
         <ul class="flex">
           <li><nuxt-link to="/about" class="pr-4">About</nuxt-link></li>
           <li>
-            <div>
-              <div v-if="!this.isLogged">
-                <button type="button" @click="loginClick()">Login</button>
+            <div v-if="!$auth.loading">
+              <div v-if="!$auth.isAuthenticated">
+                <button type="button" @click="logIn">Login</button>
               </div>
-              <div v-else>
-                <button @click="logOut()">LogOut</button>
+              <div v-if="$auth.isAuthenticated">
+                <Profile />
+                <button @click="logOut">LogOut</button>
               </div>
             </div>
           </li>
@@ -38,7 +39,18 @@ export default {
       isLogged: "",
     };
   },
-  methods: {},
+  methods: {
+    // Log the user in
+    logIn() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logOut() {
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      });
+    },
+  },
 };
 </script>
 <style scoped>
