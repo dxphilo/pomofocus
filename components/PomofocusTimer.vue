@@ -103,6 +103,7 @@
   </div>
 </template>
 <script>
+const notificationSound = require("@/assets/goeswithoutsaying.mp3").default;
 export default {
   name: "Home",
   data() {
@@ -126,6 +127,7 @@ export default {
       totalSeconds: 25 * 60,
       shortbreak: "5:00",
       pomodoroInstance: null,
+      notificationSound,
     };
   },
   computed: {
@@ -153,6 +155,12 @@ export default {
     start() {
       this.pomodoroInstance = setInterval(() => {
         this.totalSeconds -= 1;
+        const minute = Math.floor(this.totalSeconds / 60);
+        if (minute == 24) {
+          var audio = new Audio(this.notificationSound);
+          audio.play();
+          console.log(audio);
+        }
       }, 1000);
       this.isActive = true;
     },

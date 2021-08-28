@@ -26,6 +26,7 @@
     <div class="text-center py-10">
       <PomofocusTimer />
     </div>
+    <Footer />
   </div>
 </template>
 <script>

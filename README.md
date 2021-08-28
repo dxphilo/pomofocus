@@ -20,11 +20,17 @@ The technique uses a timer to break down work into intervals, traditionally 25 m
 - Tailwind CSS
 
 
-## Intro
+## Features
 
-- Add task to be complete
-- Double click task to show complete
-- Click x to delete task
+- Add task to be done.
+- Double click task to mark as complete.
+- Click x to delete task.
+- Log into your account
+
+## Coming Soon
+
+- Sync your settings with your account 
+- Retain reccuring tasks
 
 ## Build Setup
 
