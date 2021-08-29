@@ -156,7 +156,7 @@ export default {
       this.pomodoroInstance = setInterval(() => {
         this.totalSeconds -= 1;
         const minute = Math.floor(this.totalSeconds / 60);
-        if (minute == 24) {
+        if (minute == 0) {
           var audio = new Audio(this.notificationSound);
           audio.play();
           console.log(audio);
