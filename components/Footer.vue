@@ -1,5 +1,5 @@
 <template>
-  <div class="footer font-semibold  text-center mt-8 text-xl leading-9 tracking-wide ">
+  <div class="footer font-semibold  text-center mt-20 text-xl leading-9 tracking-wide ">
    <div class="coded text-xl"> </> with
       <span><span class="sr-only">love</span> 
       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="animate-ping heart-background text-red-300 z-10 svg-inline--fa fa-heart fa-w-16">
@@ -48,7 +48,7 @@ export default {
   font-size: 1rem;
   letter-spacing: 1px;
   padding-bottom: 40px;
-  padding-top: 30px;
+  padding-top: 50px;
 }
 svg {
   display: inline;

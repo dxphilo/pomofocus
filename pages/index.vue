@@ -1,5 +1,5 @@
 <template>
-  <div class="home bg-purple-400 w-full h-screen">
+  <div class="home bg-purple-400 w-full">
     <!-- start of the header component -->
     <div class="pomofocus flex justify-around py-4 text-xl">
       <div>
@@ -26,6 +26,9 @@
     <!--pomofocus component-->
     <div class="text-center py-10">
       <PomofocusTimer />
+    </div>
+    <div class="notes">
+      <Notes />
     </div>
     <Footer />
   </div>

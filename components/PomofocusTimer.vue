@@ -124,7 +124,7 @@ export default {
       tabs: ["Pomodoro", "Short Break"],
       addtask: "",
       timerType: 0,
-      totalSeconds: 1 * 60,
+      totalSeconds: 25 * 60,
       shortbreak: "5:00",
       pomodoroInstance: null,
       notificationSound,
