@@ -162,6 +162,7 @@ export default {
           var audio = new Audio(this.notificationSound);
           audio.play();
           clearInterval(this.pomodoroInstance);
+          (this.totalSeconds = 25 * 60), (this.isActive = false);
           console.log(audio);
         }
       }, 1000);
