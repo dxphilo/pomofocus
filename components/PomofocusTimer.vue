@@ -124,7 +124,7 @@ export default {
       tabs: ["Pomodoro", "Short Break"],
       addtask: "",
       timerType: 0,
-      totalSeconds: 25 * 60,
+      totalSeconds: 1 * 60,
       shortbreak: "5:00",
       pomodoroInstance: null,
       notificationSound,
@@ -155,10 +155,13 @@ export default {
     start() {
       this.pomodoroInstance = setInterval(() => {
         this.totalSeconds -= 1;
-        const minute = Math.floor(this.totalSeconds / 60);
-        if (minute == 0) {
+        if (
+          Math.floor(this.totalSeconds / 60) === 0 &&
+          this.totalSeconds % 60 === 0
+        ) {
           var audio = new Audio(this.notificationSound);
           audio.play();
+          clearInterval(this.pomodoroInstance);
           console.log(audio);
         }
       }, 1000);
