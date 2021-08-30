@@ -2,8 +2,9 @@
   <!-- PomoFocus Timer Componenent -->
   <div>
     <div class="timer">
+      <!-- start of the tabs section-->
       <div class="text-center flex justify-center pb-0 mb-0 mt-4 h-16">
-        <div v-for="tab in tabs" :key="tab">
+        <div>
           <div class="tabs">
             <button
               class="
@@ -15,55 +16,42 @@
                 py-1.5
                 px-5
               "
+              @click="toggle"
             >
-              {{ tab }}
+              Pomodoro
+            </button>
+            <button
+              class="
+                text-lg
+                ml-3
+                bg-purple-200
+                hover:bg-purple-300
+                rounded
+                py-1.5
+                px-5
+              "
+              @click="toggle"
+            >
+              Short Break
             </button>
           </div>
         </div>
       </div>
-      <div>
-        <h4 class="text-9xl pt-0 mt-0 font-bold">
-          {{ timerMinutes }}:{{ timerSeconds }}
-        </h4>
-        <div class="button-toggle">
-          <button
-            class="
-              text-4xl
-              mt-4
-              rounded
-              font-bold
-              px-14
-              py-3
-              shadow-lg
-              bg-purple-600
-              hover:shadow-xl
-              hover:bg-purple-700
-            "
-            @click="start"
-            v-if="isActive === false"
-          >
-            START
-          </button>
-          <button
-            class="
-              text-4xl
-              mt-4
-              rounded
-              font-bold
-              px-14
-              py-3
-              shadow-lg
-              bg-purple-600
-              hover:shadow-xl
-              hover:bg-purple-700
-            "
-            @click="stop"
-            v-if="isActive === true"
-          >
-            STOP
-          </button>
+      <!-- end of the tabs section -->
+      <!-- start of the timer section -->
+
+      <div class="timers">
+        <!-- show full time when Pomodoro is clicked -->
+        <div v-if="tabs">
+          <Timer />
+        </div>
+        <!-- other wise show short break when short break button is clicked -->
+        <div v-else>
+          <Shortbreak />
         </div>
       </div>
+
+      <!-- end of the timer section -->
     </div>
 
     <!-- TASKS SECTION -->
@@ -103,9 +91,13 @@
   </div>
 </template>
 <script>
+import Shortbreak from "./Shortbreak.vue";
 const notificationSound = require("@/assets/goeswithoutsaying.mp3").default;
 export default {
   name: "Home",
+  components: {
+    Shortbreak,
+  },
   data() {
     return {
       isActive: false,
@@ -121,58 +113,11 @@ export default {
           complete: false,
         },
       ],
-      tabs: ["Pomodoro", "Short Break"],
+      tabs: true,
       addtask: "",
-      timerType: 0,
-      totalSeconds: 25 * 60,
-      shortbreak: "5:00",
-      pomodoroInstance: null,
-      notificationSound,
     };
   },
-  computed: {
-    // show minutes
-    timerMinutes() {
-      const minutes = Math.floor(this.totalSeconds / 60);
-      return this.formatTime(minutes);
-    },
-    // show seconds
-    timerSeconds() {
-      let sec = this.totalSeconds % 60;
-
-      return this.formatTime(sec);
-    },
-  },
   methods: {
-    // formats time function
-    formatTime(time) {
-      if (time < 10) {
-        return "0" + time;
-      }
-      return time.toString();
-    },
-    // start the timeer count
-    start() {
-      this.pomodoroInstance = setInterval(() => {
-        this.totalSeconds -= 1;
-        if (
-          Math.floor(this.totalSeconds / 60) === 0 &&
-          this.totalSeconds % 60 === 0
-        ) {
-          var audio = new Audio(this.notificationSound);
-          audio.play();
-          clearInterval(this.pomodoroInstance);
-          (this.totalSeconds = 25 * 60), (this.isActive = false);
-          console.log(audio);
-        }
-      }, 1000);
-      this.isActive = true;
-    },
-    // stop the timer interval
-    stop() {
-      clearInterval(this.pomodoroInstance);
-      this.isActive = false;
-    },
     // update the tasks
     updateTasks() {
       if (this.addtask === "") {
@@ -191,6 +136,10 @@ export default {
     // delete the task
     deleteTask(id) {
       this.tasks = this.tasks.filter((task) => task.title !== id);
+    },
+    // toggle between work and long breaks
+    toggle() {
+      this.tabs = !this.tabs;
     },
   },
 };
