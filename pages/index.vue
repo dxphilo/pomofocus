@@ -69,7 +69,7 @@ export default {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-html:focus-within {
+.home:focus-within {
   scroll-behavior: smooth;
 }
 *,
