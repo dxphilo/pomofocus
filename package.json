@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.19.2",
+    "@auth0/auth0-spa-js": "^1.19.3",
     "auth0-js": "^9.18.0",
     "core-js": "^3.19.2",
     "nuxt": "^2.15.7"
