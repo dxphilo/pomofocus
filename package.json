@@ -12,7 +12,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.19.4",
     "auth0-js": "^9.19.0",
-    "core-js": "^3.21.0",
+    "core-js": "^3.25.4",
     "nuxt": "^2.15.7"
   },
   "devDependencies": {
